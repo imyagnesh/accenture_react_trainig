@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./appStyle";
+import "./styles.css";
 
 const App = ({firstName, lastName}) => {
     return (
