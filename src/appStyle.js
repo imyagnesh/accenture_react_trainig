@@ -1,9 +1,8 @@
- const styles = {
-    h1: {
-        backgroundColor: "green",
-    },
-    h2: {
-        backgroundColor: "orange",
-    },
+const style = {
+  h1: {
+    backgroundColor: "red",
+    color: "white",
+  },
 };
-export default styles;
+
+export default style;
