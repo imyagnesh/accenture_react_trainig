@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import "./style.css";
-
-const Input = ({...props})
-
-
-export default Button;
-=======
 import React, { memo } from "react";
 import "./style.css";
 
@@ -16,4 +7,3 @@ const Button = ({ children, ...otherProps }) => {
 };
 
 export default memo(Button);
->>>>>>> main
