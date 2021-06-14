@@ -40,6 +40,13 @@ export class index extends Component {
     });
   };
 
+  deleteItem = (todoItem) => {
+    const { todoList } = this.state;
+    const index = todoList.findIndex((todo) => todo.id === todoItem.id);
+    const newList = [...todoList.slice(0, index), ...todoList.slice(index + 1)];
+    this.setState({ todoList: newList });
+  };
+
   render() {
     const { todoList } = this.state;
 
@@ -62,6 +69,9 @@ export class index extends Component {
                   onChange={() => this.completeTodo(todo)}
                 />
                 <span>{todo.todoText}</span>
+                <button onClick={() => this.deleteItem(todo)}>
+                  Delete item
+                </button>
               </div>
             );
           })}
