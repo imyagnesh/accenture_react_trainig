@@ -1,6 +1,6 @@
-import React, { Component, createRef } from "react";
+import React, { Component, createRef } from 'react';
 
-export class index extends Component {
+export class Todo extends Component {
   todoInputRef = createRef();
 
   state = {
@@ -22,8 +22,8 @@ export class index extends Component {
         ],
       },
       () => {
-        this.todoInputRef.current.value = "";
-      }
+        this.todoInputRef.current.value = '';
+      },
     );
   };
 
@@ -35,6 +35,15 @@ export class index extends Component {
       { ...todo, isDone: !todo.isDone },
       ...todoList.slice(index + 1),
     ];
+    this.setState({
+      todoList: newList,
+    });
+  };
+
+  deleteTodo = (todo) => {
+    const { todoList } = this.state;
+    const index = todoList.findIndex((x) => x.id === todo.id);
+    const newList = [...todoList.slice(0, index), ...todoList.slice(index + 1)];
     this.setState({
       todoList: newList,
     });
@@ -53,22 +62,23 @@ export class index extends Component {
           </button>
         </div>
         <div>
-          {todoList.map((todo) => {
-            return (
-              <div key={todo.id}>
-                <input
-                  type="checkbox"
-                  checked={todo.isDone}
-                  onChange={() => this.completeTodo(todo)}
-                />
-                <span>{todo.todoText}</span>
-              </div>
-            );
-          })}
+          {todoList.map((todo) => (
+            <div key={todo.id}>
+              <input
+                type="checkbox"
+                checked={todo.isDone}
+                onChange={() => this.completeTodo(todo)}
+              />
+              <span>{todo.todoText}</span>
+              <button type="button" onClick={() => this.deleteTodo(todo)}>
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     );
   }
 }
 
-export default index;
+export default Todo;
