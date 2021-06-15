@@ -66,17 +66,18 @@ export class index extends Component {
     this.setState({todoList: newList});
   }
 
-  deleteSelected = () => {
-    const { todoList } = this.state;
-    todoList.forEach((item) => {
-      if(item.isDone) {
+  // not working at this time
+  // deleteSelected = () => {
+  //   const { todoList } = this.state;
+  //   todoList.forEach((item) => {
+  //     if(item.isDone) {
         
-      } else {
-        item.isDone = false;
-      }
-      newList.push(item);
-    });
-  }
+  //     } else {
+  //       item.isDone = false;
+  //     }
+  //     newList.push(item);
+  //   });
+  // }
 
   render() {
     const { todoList } = this.state;
