@@ -53,8 +53,6 @@ class Modal extends Component {
     };
   }
 
-  
-
   // calls only once
   // to register events
   // fetch data
