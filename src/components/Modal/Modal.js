@@ -1,4 +1,4 @@
-import React, { Component, createRef, PureComponent } from 'react';
+import React, { Component, createRef } from 'react';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 
@@ -53,10 +53,6 @@ class Modal extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
   // calls only once
   // to register events
   // fetch data
@@ -71,6 +67,10 @@ class Modal extends Component {
     }, 1000);
 
     this.h1Ref.current.style = 'color:green';
+  }
+
+  shouldComponentUpdate() {
+    return true;
   }
 
   getSnapshotBeforeUpdate() {
@@ -93,9 +93,10 @@ class Modal extends Component {
   // to render HTML
   render() {
     // console.log("render");
+    const { isOpen, desc } = this.state;
     return (
-      <dialog open={this.state.isOpen}>
-        <h1 ref={this.h1Ref}>{this.state.desc}</h1>
+      <dialog open={isOpen}>
+        <h1 ref={this.h1Ref}>{desc}</h1>
         <Button onClick={this.closeModal}>Close</Button>
         <Input type="text" />
       </dialog>
