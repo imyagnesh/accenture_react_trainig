@@ -5,9 +5,11 @@ export class index extends Component {
 
   state = {
     todoList: [],
+    filterType: "all"
   };
 
-  addTodo = () => {
+  addTodo = (event) => {
+    event.preventDefault();
     const { todoList } = this.state;
 
     this.setState(
@@ -46,8 +48,9 @@ export class index extends Component {
     const newList = [...todoList.slice(0, index), ...todoList.slice(index + 1)];
     if (todo.isDone) {
       this.setState({
-      todoList: newList,
-    })};
+        todoList: newList,
+      });
+    }
   };
 
   render() {
@@ -56,12 +59,12 @@ export class index extends Component {
     return (
       <div>
         <h1>Todo App</h1>
-        <div>
-          <input type="text" ref={this.todoInputRef} />
-          <button type="button" onClick={this.addTodo}>
+        <form onSubmit={this.addTodo}>
+          <input type="text" ref={this.todoInputRef} required />
+          <button type="submit" >
             Add Todo
           </button>
-        </div>
+        </form>
         <div>
           {todoList.map((todo) => {
             return (
@@ -73,6 +76,24 @@ export class index extends Component {
                 />
                 <span>{todo.todoText}</span>
                 <button onClick={() => this.deleteTodo(todo)}>Delete</button>
+                <button
+                  type="button"
+                  onClick={() => this.setState({ filterType: "all" })}
+                >
+                  All
+                </button>
+                <button
+                  type="button"
+                  onClick={() => this.setState({ filterType: "pending" })}
+                >
+                  Pending
+                </button>
+                <button
+                  type="button"
+                  onClick={() => this.setState({ filterType: "completed" })}
+                >
+                  Completed
+                </button>
               </div>
             );
           })}
