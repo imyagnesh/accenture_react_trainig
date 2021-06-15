@@ -1,6 +1,6 @@
-import React, { Component, createRef, PureComponent } from "react";
-import Button from "../Button/Button";
-import Input from "../Input/Input";
+import React, { Component, createRef } from 'react';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 
 // RULE
 // Component will re-render only when prop change or state change
@@ -53,24 +53,24 @@ class Modal extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
   // calls only once
   // to register events
   // fetch data
   // manipulat DOM
   componentDidMount() {
-    document.addEventListener("mousemove", () => {
-      console.log("mousemove");
+    document.addEventListener('mousemove', () => {
+      console.log('mousemove');
     });
 
     this.interval = setInterval(() => {
-      console.log("interval");
+      console.log('interval');
     }, 1000);
 
-    this.h1Ref.current.style = "color:green";
+    this.h1Ref.current.style = 'color:green';
+  }
+
+  shouldComponentUpdate() {
+    return true;
   }
 
   getSnapshotBeforeUpdate() {
@@ -82,7 +82,7 @@ class Modal extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mousemove");
+    document.removeEventListener('mousemove');
     clearInterval(this.interval);
   }
 
@@ -93,9 +93,10 @@ class Modal extends Component {
   // to render HTML
   render() {
     // console.log("render");
+    const { isOpen, desc } = this.state;
     return (
-      <dialog open={this.state.isOpen}>
-        <h1 ref={this.h1Ref}>{this.state.desc}</h1>
+      <dialog open={isOpen}>
+        <h1 ref={this.h1Ref}>{desc}</h1>
         <Button onClick={this.closeModal}>Close</Button>
         <Input type="text" />
       </dialog>
