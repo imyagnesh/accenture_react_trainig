@@ -9,8 +9,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
-    "lint": "eslint .",
-    
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",

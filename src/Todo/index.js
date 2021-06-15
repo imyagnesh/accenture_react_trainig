@@ -5,9 +5,11 @@ export class index extends Component {
 
   state = {
     todoList: [],
+    filterType: 'all'
   };
 
-  addTodo = () => {
+  addTodo = (event) => {
+    event.preventDefault();
     const { todoList } = this.state;
 
     this.setState(
@@ -66,34 +68,40 @@ export class index extends Component {
     this.setState({todoList: newList});
   }
 
-  // not working at this time
-  // deleteSelected = () => {
-  //   const { todoList } = this.state;
-  //   todoList.forEach((item) => {
-  //     if(item.isDone) {
-        
-  //     } else {
-  //       item.isDone = false;
-  //     }
-  //     newList.push(item);
-  //   });
-  // }
+  // deleting the completed/selected items
+  deleteSelected = () => {
+    const { todoList } = this.state;
+    const newList = todoList.filter((item) => {
+      return !item.isDone;
+    });
+    this.setState({
+      todoList: newList,
+    });
+  }
 
   render() {
-    const { todoList } = this.state;
+    const { todoList, filterType } = this.state;
 
     return (
       <div>
         <h1>Todo App</h1>
-        <div>
-          <input type="text" ref={this.todoInputRef} />
-          <button type="button" onClick={this.addTodo}>
+        <form onSubmit={this.addTodo}>
+          <input type="text" ref={this.todoInputRef} required />
+          <button type="submit">
             Add Todo
           </button>
           <button type="button" onClick={()=>{this.deleteSelected()}}>Delete</button>
-        </div>
+        </form>
         <div>
-          {todoList.map((todo) => {
+          {todoList.filter((todo) => {
+              if(filterType === 'pending') {
+                return todo.isDone === false;
+              } else if (filterType === 'completed') {
+                return todo.isDone === true;
+              } else {
+                return true;
+              }
+            }).map((todo) => {
             return (
               <div key={todo.id}>
                 <input
@@ -101,16 +109,18 @@ export class index extends Component {
                   checked={todo.isDone}
                   onChange={() => this.completeTodo(todo)}
                 />
-                <span>{todo.todoText}</span>
+                <span style={{textDecoration: todo.isDone ? 'line-through' : "none"}}>
+                  {todo.todoText}
+                </span>
                 <button type="button" onClick={() => {this.deleteItem(todo)}}>Delete</button>
               </div>
             );
           })}
         </div>
         <div>
-          <button type="button" onClick={() => {this.selectAll()}}>Add</button>
-          <button type="button">Pending</button>
-          <button type="button">Completed</button>
+          <button type="button" onClick={() => {this.setState({filterType: 'all'})}}>All</button>
+          <button type="button" onClick={() => {this.setState({filterType: 'pending'})}}>Pending</button>
+          <button type="button" onClick={() => {this.setState({filterType: 'completed'})}}>Completed</button>
         </div>
       </div>
     );
