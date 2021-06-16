@@ -15,8 +15,17 @@ class Register extends Component {
     return (
       <div>
           <h1>Register Page</h1>
-          <MyForm fields={fields} onSubmit={(values) => {
+          <MyForm fields={fields} onSubmit={async (values) => {
               console.log(values);
+              await fetch('http://localhost:8080/users', {
+                  method: "POST",
+                  body: JSON.stringify(values),
+                  headers: {
+                      "Content-Type": "application/json",
+                      "Accept": "application/json",
+                  }
+              })
+              this.props.history.push('/');
           }} />
       </div>
     );

@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "name": "yagnesh",
+      "gender": "male",
+      "username": "imyagnesh",
+      "password": "Password",
+      "confirmPassword": "Password",
+      "id": 1
+    },
+    {
+      "name": "rohit",
+      "gender": "male",
+      "username": "imrohit",
+      "password": "Password",
+      "confirmPassword": "Password",
+      "id": 2
+    }
+  ],
+  "todoList": [
+    {
+      "title": "give training",
+      "isDone": false,
+      "id": 1
+    }
+  ]
+}

@@ -17,7 +17,7 @@ const MyForm = ({ fields, ...props }) => (
     }) => (
       <Form>
         {fields.map((x) => <Field key={x.name} {...x} />)}
-        <button type="submit">Register</button>
+        <button disabled={isSubmitting} type="submit">Register</button>
       </Form>
     )}
   </Formik>
