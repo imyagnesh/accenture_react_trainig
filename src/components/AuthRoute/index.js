@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 const AuthRoute = ({ isLoggedIn, component: Component, ...props }) => (
   <Route
@@ -9,12 +9,13 @@ const AuthRoute = ({ isLoggedIn, component: Component, ...props }) => (
         return <Component {...params} />;
       }
       return (
-        <Redirect to={{
-          pathname: '/',
-          state: {
-            data: params.location.pathname,
-          },
-        }}
+        <Redirect
+          to={{
+            pathname: "/",
+            state: {
+              data: params.location.pathname,
+            },
+          }}
         />
       );
     }}

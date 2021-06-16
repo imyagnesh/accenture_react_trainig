@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const About = (props) => (
   <div>
@@ -6,7 +6,7 @@ const About = (props) => (
     <button
       type="button"
       onClick={() => {
-        props.history.replace('/contact');
+        props.history.replace("/contact");
       }}
     >
       Go To Contact Page

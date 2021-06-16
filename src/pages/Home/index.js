@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Home = (props) => {
   console.log(props);
@@ -8,7 +8,7 @@ const Home = (props) => {
       <button
         type="button"
         onClick={() => {
-          props.history.push('/about');
+          props.history.push("/about");
         }}
       >
         Go To About Page

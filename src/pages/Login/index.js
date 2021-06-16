@@ -1,13 +1,11 @@
-/* eslint-disable */
-import React, { Component, createRef } from 'react';
-import { Link } from 'react-router-dom';
-import MyForm from '../../components/MyForm';
-import fields from './fields';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import MyForm from "../../components/MyForm";
+import fields from "./fields";
 
-const wait = (time) => new Promise(resolve => setTimeout(resolve, 5000));
+const wait = (time) => new Promise((resolve) => setTimeout(resolve, 5000));
 
 class Login extends Component {
-
   render() {
     return (
       <div>
@@ -15,12 +13,14 @@ class Login extends Component {
         <MyForm
           fields={fields}
           onSubmit={async (values) => {
-            const res = await fetch(`http://localhost:8080/users?username=${values.username}&password=${values.password}`);
+            const res = await fetch(
+              `http://localhost:8080/users?username=${values.username}&password=${values.password}`
+            );
             const users = await res.json();
-            if(users.length > 0) {
-                alert('login success')
+            if (users.length > 0) {
+              alert("login success");
             } else {
-                alert('please provide correct credentials')
+              alert("please provide correct credentials");
             }
           }}
         />

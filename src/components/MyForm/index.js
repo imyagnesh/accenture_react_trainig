@@ -1,5 +1,5 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import React from "react";
+import { Formik, Form, Field } from "formik";
 
 const MyForm = ({ fields, ...props }) => (
   <Formik
@@ -16,8 +16,12 @@ const MyForm = ({ fields, ...props }) => (
       isSubmitting,
     }) => (
       <Form>
-        {fields.map((x) => <Field key={x.name} {...x} />)}
-        <button disabled={isSubmitting} type="submit">Register</button>
+        {fields.map((x) => (
+          <Field key={x.name} {...x} />
+        ))}
+        <button disabled={isSubmitting} type="submit">
+          Register
+        </button>
       </Form>
     )}
   </Formik>
