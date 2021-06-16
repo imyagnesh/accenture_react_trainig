@@ -8,12 +8,17 @@ export class Todo extends Component {
     filterType: "all",
   };
 
-  async componentDidMount() {
+  getTodos = async () => {
     const res = await fetch("http://localhost:8080/todoList");
     const todos = await res.json();
     this.setState({
       todoList: todos,
     });
+    console.log(todos);
+  };
+
+  async componentDidMount() {
+    this.getTodos();
   }
 
   addTodo = async (event) => {
@@ -21,7 +26,7 @@ export class Todo extends Component {
 
     const { todoList } = this.state;
 
-    const res = await fetch("http://localhost:8080/todoList", {
+    let res = await fetch("http://localhost:8080/todoList", {
       method: "POST",
       body: JSON.stringify({
         todoText: this.todoInputRef.current.value,
@@ -34,36 +39,41 @@ export class Todo extends Component {
     });
     const todo = await res.json();
 
-    this.setState(
-      {
-        todoList: [todo, ...todoList],
+    this.getTodos();
+
+    this.setState(() => {
+      this.todoInputRef.current.value = "";
+    });
+  };
+
+  completeTodo = async (todo) => {
+    const { todoList } = this.state;
+    // const index = todoList.find((x) => x.id === todo.id);
+    let res = await fetch(`http://localhost:8080/todoList/${todo.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...todo,
+        isDone: !todo.isDone,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      () => {
-        this.todoInputRef.current.value = "";
-      }
-    );
+    });
+    const edited = await res.json();
+    this.getTodos();
   };
 
-  completeTodo = (todo) => {
-    const { todoList } = this.state;
-    const index = todoList.findIndex((x) => x.id === todo.id);
-    const newList = [
-      ...todoList.slice(0, index),
-      { ...todo, isDone: !todo.isDone },
-      ...todoList.slice(index + 1),
-    ];
-    this.setState({
-      todoList: newList,
+  deleteTodo = async (todo) => {
+    const res = await fetch(`http://localhost:8080/todoList/${todo.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
-  };
-
-  deleteTodo = (todo) => {
-    const { todoList } = this.state;
-    const index = todoList.findIndex((x) => x.id === todo.id);
-    const newList = [...todoList.slice(0, index), ...todoList.slice(index + 1)];
-    this.setState({
-      todoList: newList,
-    });
+    const deleted = await res.json();
+    this.getTodos();
   };
 
   render() {
