@@ -1,7 +1,7 @@
 import FormikInput from "../../components/FormikInput";
 import FormikSelect from "../../components/FormikSelect";
 
-const checkMendetory = (value, fieldName) => (!value ? `${fieldName} is mendetory` : '');
+export const checkMendetory = (value, fieldName) => (!value ? `${fieldName} is mendetory` : '');
 
 const fields = [{
   name: 'name',
