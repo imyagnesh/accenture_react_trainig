@@ -73,7 +73,7 @@ class Register extends Component {
                 {touched.confirmPassword && errors.confirmPassword && <span style={{color: 'red'}}>{errors.confirmPassword} </span>}
               </div>
               <div>
-                {errors.passMatch && <span style={{color: 'red'}}>{errors.passMatch}</span>}
+                {touched.confirmPassword && errors.passMatch && <span style={{color: 'red'}}>{errors.passMatch}</span>}
               </div>
               <div>
                 <button disabled={isSubmitting} type="submit">Register</button>
