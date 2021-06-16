@@ -48,6 +48,7 @@ class Register extends Component {
             {({
                 values,
                 handleChange,
+                setFieldValue,
                 handleBlur,
                 handleSubmit,
                 errors,
@@ -56,7 +57,9 @@ class Register extends Component {
             }) => <form onSubmit={handleSubmit}> 
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input type="text" name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} />
+                    <input type="text" name="name" value={values.name} onChange={(event) => {
+                        setFieldValue('name',event.target.value.toUpperCase());
+                    }} onBlur={handleBlur} />
                     {touched.name && errors.name && <span style={{ color: 'red'}}>{errors.name}</span>}
                 </div>
                 <div>
