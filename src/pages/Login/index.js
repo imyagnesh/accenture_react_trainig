@@ -29,6 +29,7 @@ class Login extends Component {
             if(values.password !== values.passwordConf) {
                 error.password = "The passwords do not match"
             }
+            
             return error;
           }}
           onSubmit={async (values, actions) => {
