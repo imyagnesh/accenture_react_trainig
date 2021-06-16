@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Link,
   Redirect,
 } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -13,21 +14,20 @@ import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AuthRoute from './components/AuthRoute';
+import { checkLoggedIn, clearToken } from './utils';
+import { LocaleProvider } from './context/localeContext';
+
+const customHistory = createBrowserHistory();
 
 export class Main extends Component {
-    state = {
-      isLoggedIn: false,
-    }
-
-    render() {
-      const { isLoggedIn } = this.state;
-      return (
-        <Router>
-          {isLoggedIn && (
+  render() {
+    return (
+      <Router history={customHistory}>
+        {checkLoggedIn() && (
           <nav>
             <ul>
               <li>
-                <Link to="/Home">Home</Link>
+                <Link to="/home">Home</Link>
               </li>
               <li>
                 <Link to="/about">About</Link>
@@ -35,22 +35,35 @@ export class Main extends Component {
               <li>
                 <Link to="/contact">Cotact</Link>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    clearToken();
+                    customHistory.push('/');
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
             </ul>
           </nav>
-          )}
-          <main>
+        )}
+        <main>
+          <LocaleProvider>
             <Switch>
               <Route path="/" exact component={Login} />
               <Route path="/register" component={Register} />
-              <AuthRoute path="/home" component={Home} isLoggedIn={isLoggedIn} />
-              <AuthRoute path="/about" component={About} isLoggedIn={isLoggedIn} />
-              <AuthRoute path="/contact" component={Contact} isLoggedIn={isLoggedIn} />
+              <AuthRoute path="/home" component={Home} />
+              <AuthRoute path="/about" component={About} />
+              <AuthRoute path="/contact" component={Contact} />
               <Route component={NotFound} />
             </Switch>
-          </main>
-        </Router>
-      );
-    }
+          </LocaleProvider>
+        </main>
+      </Router>
+    );
+  }
 }
 
 export default Main;

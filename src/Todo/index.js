@@ -85,9 +85,9 @@ export class Todo extends Component {
 
     return (
       <div>
-        <h1>Todo App</h1>
-        <form onSubmit={this.addTodo}>
-          <input type="text" ref={this.todoInputRef} required />
+        <h1 data-testid="header">Todo App</h1>
+        <form onSubmit={this.addTodo} data-testid="todoForm">
+          <input data-testid="txtTodo" type="text" ref={this.todoInputRef} required />
           <button type="submit">
             Add Todo
           </button>
@@ -104,7 +104,7 @@ export class Todo extends Component {
               }
             }).map((todo) => {
             return (
-              <div key={todo.id}>
+              <div data-testid="todo-list" key={todo.id}>
                 <input
                   type="checkbox"
                   checked={todo.isDone}
@@ -113,7 +113,7 @@ export class Todo extends Component {
                 <span style={{textDecoration: todo.isDone ? 'line-through' : "none"}}>
                   {todo.todoText}
                 </span>
-                <button type="button" onClick={() => {this.deleteItem(todo)}}>Delete</button>
+                <button data-testid="btnTestDelete" type="button" onClick={() => {this.deleteItem(todo)}}>Delete</button>
               </div>
             );
           })}

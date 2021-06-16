@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "name": "Nicoleta",
+      "gender": "Female",
+      "username": "nicooletahehe",
+      "password": "abc",
+      "cPassword": "abc",
+      "id": 1
+    },
+    {
+      "name": "Andreea",
+      "gender": "Female",
+      "username": "andr",
+      "password": "abc",
+      "cPassword": "abc",
+      "id": 2
+    },
+    {
+      "name": "Sofia",
+      "gender": "Female",
+      "username": "sf",
+      "password": "abc",
+      "cPassword": "abc",
+      "id": 3
+    }
+  ],
+  "todoList": [
+    {
+      "title": "give training",
+      "isDone": false,
+      "id": 1
+    }
+  ]
+}
