@@ -1,6 +1,6 @@
-import React, { Component, createRef } from "react";
+import React, { Component, createRef } from 'react';
 
-export class index extends Component {
+export class Todo extends Component {
   todoInputRef = createRef();
 
   state = {
@@ -10,6 +10,7 @@ export class index extends Component {
 
   addTodo = (event) => {
     event.preventDefault();
+
     const { todoList } = this.state;
 
     this.setState(
@@ -24,8 +25,8 @@ export class index extends Component {
         ],
       },
       () => {
-        this.todoInputRef.current.value = "";
-      }
+        this.todoInputRef.current.value = '';
+      },
     );
   };
 
@@ -127,4 +128,4 @@ export class index extends Component {
   }
 }
 
-export default index;
+export default Todo;
