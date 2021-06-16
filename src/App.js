@@ -1,8 +1,8 @@
-import React from 'react';
-import style from './appStyle';
-import Button from './components/Button/Button';
-import Modal from './components/Modal/Modal';
-import './styles.css';
+import React from "react";
+import style from "./appStyle";
+import Button from "./components/Button/Button";
+import Modal from "./components/Modal/Modal";
+import "./styles.css";
 
 // const GOOGLE_KEY = process.env.staging;
 
@@ -16,7 +16,7 @@ const a = ({ firstName, lastName }) => (
     <Button
       type="button"
       onClick={() => {
-        alert('click me');
+        alert("click me");
       }}
     >
       Click Me
@@ -24,7 +24,7 @@ const a = ({ firstName, lastName }) => (
     <Button
       type="button"
       onClick={() => {
-        alert('Press me');
+        alert("Press me");
       }}
     >
       Press Me
@@ -32,7 +32,7 @@ const a = ({ firstName, lastName }) => (
     <Button
       type="submit"
       onClick={() => {
-        alert('click me');
+        alert("click me");
       }}
     >
       Hover Me

@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import MainApp from './main';
+import React from "react";
+import ReactDOM from "react-dom";
+import TodoApp from "./Todo";
 
-ReactDOM.render(<MainApp />, document.getElementById('root'));
+ReactDOM.render(<TodoApp />, document.getElementById("root"));

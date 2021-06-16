@@ -23,6 +23,22 @@
       "password": "abc",
       "cPassword": "abc",
       "id": 3
+    },
+    {
+      "name": "yagnesh",
+      "gender": "male",
+      "username": "imyagnesh",
+      "password": "Password",
+      "confirmPassword": "Password",
+      "id": 4
+    },
+    {
+      "name": "rohit",
+      "gender": "male",
+      "username": "imrohit",
+      "password": "Password",
+      "confirmPassword": "Password",
+      "id": 5
     }
   ],
   "todoList": [
@@ -30,6 +46,16 @@
       "title": "give training",
       "isDone": false,
       "id": 1
+    },
+    {
+      "todoText": "give training",
+      "isDone": false,
+      "id": 2
+    },
+    {
+      "todoText": "get milk",
+      "isDone": false,
+      "id": 3
     }
   ]
 }

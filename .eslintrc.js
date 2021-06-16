@@ -4,21 +4,22 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  parser: '@babel/eslint-parser',
+  parser: "@babel/eslint-parser",
   extends: [
-    'plugin:react/recommended',
-    'airbnb',
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
   ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['react'],
+  plugins: ["react", "prettier"],
   rules: {
-    'react/state-in-constructor': 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    "react/state-in-constructor": 0,
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
   },
 };
