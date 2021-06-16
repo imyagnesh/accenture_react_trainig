@@ -28,8 +28,7 @@ export default class LogIn extends Component {
             }
             if (!values.confirm_password) {
                 error.confirm_password = "Please Confirm Password!";
-            }
-            if(values.password !== values.confirm_password) {
+            } else if(values.password !== values.confirm_password) {
                 error.passMatch = 'Password does NOT match!'
               }
             return error;
