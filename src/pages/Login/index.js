@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import MyForm from "../../components/MyForm";
 import fields from "./fields";
 
-const wait = (time) => new Promise((resolve) => setTimeout(resolve, 5000));
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Login extends Component {
   render() {
     return (
@@ -12,15 +11,23 @@ class Login extends Component {
         <h1>Login Page</h1>
         <MyForm
           fields={fields}
-          onSubmit={async (values) => {
-            const res = await fetch(
-              `http://localhost:8080/users?username=${values.username}&password=${values.password}`
-            );
-            const users = await res.json();
-            if (users.length > 0) {
-              alert("login success");
-            } else {
-              alert("please provide correct credentials");
+          onSubmit={async (values, actions) => {
+            console.log(actions);
+            try {
+              const res = await fetch(
+                `http://localhost:8080/users?username=${values.username}&password=${values.password}`
+              );
+              const users = await res.json();
+              if (users.length > 0) {
+                sessionStorage.setItem("token", JSON.stringify(users[0]));
+                this.props.history.push("/home");
+              } else {
+                actions.setErrors({
+                  serverError: "Please Provide correct Credentials",
+                });
+              }
+            } catch (error) {
+              actions.setErrors({ serverError: error.message });
             }
           }}
         />

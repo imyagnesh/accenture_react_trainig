@@ -6,16 +6,11 @@ const MyForm = ({ fields, ...props }) => (
     initialValues={fields.reduce((p, c) => ({ ...p, [c.name]: c.value }), {})}
     {...props}
   >
-    {({
-      values,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      errors,
-      touched,
-      isSubmitting,
-    }) => (
+    {({ isSubmitting, errors }) => (
       <Form>
+        {errors.serverError && (
+          <h3 style={{ color: "red" }}>{errors.serverError}</h3>
+        )}
         {fields.map((x) => (
           <Field key={x.name} {...x} />
         ))}

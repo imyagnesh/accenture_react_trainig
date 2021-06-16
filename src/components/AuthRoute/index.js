@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { checkLoggedIn } from "../../utils";
 
-const AuthRoute = ({ isLoggedIn, component: Component, ...props }) => (
+const AuthRoute = ({ component: Component, ...props }) => (
   <Route
     {...props}
     render={(params) => {
-      if (isLoggedIn) {
+      if (checkLoggedIn()) {
         return <Component {...params} />;
       }
       return (

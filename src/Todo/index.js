@@ -8,21 +8,35 @@ export class Todo extends Component {
     filterType: "all",
   };
 
-  addTodo = (event) => {
+  async componentDidMount() {
+    const res = await fetch("http://localhost:8080/todoList");
+    const todos = await res.json();
+    this.setState({
+      todoList: todos,
+    });
+  }
+
+  addTodo = async (event) => {
     event.preventDefault();
 
     const { todoList } = this.state;
 
+    const res = await fetch("http://localhost:8080/todoList", {
+      method: "POST",
+      body: JSON.stringify({
+        todoText: this.todoInputRef.current.value,
+        isDone: false,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const todo = await res.json();
+
     this.setState(
       {
-        todoList: [
-          {
-            id: new Date().valueOf(),
-            todoText: this.todoInputRef.current.value,
-            isDone: false,
-          },
-          ...todoList,
-        ],
+        todoList: [todo, ...todoList],
       },
       () => {
         this.todoInputRef.current.value = "";
@@ -57,9 +71,14 @@ export class Todo extends Component {
 
     return (
       <div>
-        <h1>Todo App</h1>
-        <form onSubmit={this.addTodo}>
-          <input type="text" ref={this.todoInputRef} required />
+        <h1 data-testid="header">Todo App</h1>
+        <form onSubmit={this.addTodo} data-testid="todoForm">
+          <input
+            data-testid="txtTodo"
+            type="text"
+            ref={this.todoInputRef}
+            required
+          />
           <button type="submit">Add Todo</button>
         </form>
         <div>
@@ -74,7 +93,7 @@ export class Todo extends Component {
               return true;
             })
             .map((todo) => (
-              <div key={todo.id}>
+              <div data-testid="todo-list" key={todo.id}>
                 <input
                   type="checkbox"
                   checked={todo.isDone}
@@ -87,7 +106,11 @@ export class Todo extends Component {
                 >
                   {todo.todoText}
                 </span>
-                <button type="button" onClick={() => this.deleteTodo(todo)}>
+                <button
+                  data-testid="btnDelete"
+                  type="button"
+                  onClick={() => this.deleteTodo(todo)}
+                >
                   Delete
                 </button>
               </div>
