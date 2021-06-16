@@ -19,14 +19,14 @@
   ],
   "todoList": [
     {
-      "todoText": "give training",
-      "isDone": false,
-      "id": 1
+      "todoText": "new",
+      "isDone": true,
+      "id": 2
     },
     {
-      "todoText": "get milk",
+      "todoText": "item",
       "isDone": false,
-      "id": 2
+      "id": 3
     }
   ]
 }
