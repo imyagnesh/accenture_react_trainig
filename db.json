@@ -17,16 +17,5 @@
       "id": 2
     }
   ],
-  "todoList": [
-    {
-      "todoText": "give training",
-      "isDone": false,
-      "id": 1
-    },
-    {
-      "todoText": "get milk",
-      "isDone": false,
-      "id": 2
-    }
-  ]
+  "todoList": []
 }
