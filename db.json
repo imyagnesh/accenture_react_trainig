@@ -43,19 +43,39 @@
   ],
   "todoList": [
     {
-      "title": "give training",
-      "isDone": false,
-      "id": 1
-    },
-    {
       "todoText": "give training",
-      "isDone": false,
-      "id": 2
+      "isDone": true,
+      "id": 1
     },
     {
       "todoText": "get milk",
       "isDone": false,
-      "id": 3
+      "id": 6
+    },
+    {
+      "todoText": "pay bills",
+      "isDone": true,
+      "id": 7
+    },
+    {
+      "todoText": "banana",
+      "isDone": false,
+      "id": 8
+    },
+    {
+      "todoText": "tomato",
+      "isDone": false,
+      "id": 9
+    },
+    {
+      "todoText": "flour",
+      "isDone": false,
+      "id": 10
+    },
+    {
+      "todoText": "sugar",
+      "isDone": false,
+      "id": 11
     }
   ]
 }
