@@ -1,6 +1,6 @@
 import React, { Component, createRef } from "react";
 
-export class index extends Component {
+export class Todo extends Component {
   todoInputRef = createRef();
 
   state = {
@@ -8,20 +8,36 @@ export class index extends Component {
     filterType: "all"
   };
 
-  addTodo = (event) => {
+  async componentDidMount() {
+    const res = await fetch("http://localhost:3000/todoList");
+    const todos = await res.json();
+    this.setState({
+      todoList: todos,
+    });
+  }
+
+  addTodo = async (event) => {
     event.preventDefault();
+
     const { todoList } = this.state;
+
+    const res = await fetch("http://localhost:3000/todoList", {
+      method: "POST",
+      body: JSON.stringify({
+        todoText: this.todoInputRef.current.value,
+        isDone: false,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+    });
+
+    const todo = await res.json();
 
     this.setState(
       {
-        todoList: [
-          {
-            id: new Date().valueOf(),
-            todoText: this.todoInputRef.current.value,
-            isDone: false,
-          },
-          ...todoList,
-        ],
+        todoList: [todo, ...todoList],
       },
       () => {
         this.todoInputRef.current.value = "";
@@ -103,4 +119,4 @@ export class index extends Component {
   }
 }
 
-export default index;
+export default Todo;

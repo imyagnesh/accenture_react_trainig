@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Main from "./main";
+import Todo from "./Todo/index";
 
-ReactDOM.render(<Main />, document.getElementById("root"));
+ReactDOM.render(<Todo />, document.getElementById("root"));
