@@ -5,7 +5,7 @@ export class Todo extends Component {
 
   state = {
     todoList: [],
-    filterType: "all",
+    filterType: 'all'
   };
 
   async componentDidMount() {
@@ -44,27 +44,76 @@ export class Todo extends Component {
     );
   };
 
-  completeTodo = (todo) => {
+  completeTodo = async (todo) => {
     const { todoList } = this.state;
     const index = todoList.findIndex((x) => x.id === todo.id);
-    const newList = [
-      ...todoList.slice(0, index),
-      { ...todo, isDone: !todo.isDone },
-      ...todoList.slice(index + 1),
-    ];
+
+    const res = await fetch(`http://localhost:8080/todoList/${todo.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        todoText: todo.todoText,
+        isDone: !todo.isDone,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const todoString = await res.json();
+
     this.setState({
-      todoList: newList,
+      todoList: [
+        ...todoList.slice(0, index),
+        todoString,
+        ...todoList.slice(index + 1),
+      ],
     });
   };
 
-  deleteTodo = (todo) => {
+  deleteItem = async (todo) => {
     const { todoList } = this.state;
     const index = todoList.findIndex((x) => x.id === todo.id);
-    const newList = [...todoList.slice(0, index), ...todoList.slice(index + 1)];
+
+    const res = await fetch(`http://localhost:8080/todoList/${todo.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    this.setState({
+      todoList: [
+        ...todoList.slice(0, index),
+        ...todoList.slice(index + 1),
+      ],
+    });
+  }
+
+  // selectAll = () => {
+  //   const { todoList } = this.state;
+  //   const newList = [];
+  //   todoList.forEach((item) => {
+  //     if(!item.isDone) {
+  //       item.isDone = true;
+  //     } else {
+  //       item.isDone = false;
+  //     }
+  //     newList.push(item);
+  //   });
+  //   this.setState({todoList: newList});
+  // }
+
+  // deleting the completed/selected items
+  deleteSelected = () => {
+    const { todoList } = this.state;
+    const newList = todoList.filter((item) => {
+      return !item.isDone;
+    });
     this.setState({
       todoList: newList,
     });
-  };
+  }
 
   render() {
     const { todoList, filterType } = this.state;
@@ -80,6 +129,7 @@ export class Todo extends Component {
             required
           />
           <button type="submit">Add Todo</button>
+          <button type="button" onClick={()=>{this.deleteSelected()}}>Delete</button>
         </form>
         <div>
           {todoList
@@ -99,48 +149,18 @@ export class Todo extends Component {
                   checked={todo.isDone}
                   onChange={() => this.completeTodo(todo)}
                 />
-                <span
-                  style={{
-                    textDecoration: todo.isDone ? "line-through" : "none",
-                  }}
-                >
+                <span style={{textDecoration: todo.isDone ? 'line-through' : "none"}}>
                   {todo.todoText}
                 </span>
-                <button
-                  data-testid="btnDelete"
-                  type="button"
-                  onClick={() => this.deleteTodo(todo)}
-                >
-                  Delete
-                </button>
+                <button data-testid="btnTestDelete" type="button" onClick={() => {this.deleteItem(todo)}}>Delete</button>
               </div>
-            ))}
+            ),
+          )}
         </div>
         <div>
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ filterType: "all" });
-            }}
-          >
-            All
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ filterType: "pending" });
-            }}
-          >
-            Pending
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ filterType: "completed" });
-            }}
-          >
-            Completed
-          </button>
+          <button type="button" onClick={() => {this.setState({filterType: 'all'})}}>All</button>
+          <button type="button" onClick={() => {this.setState({filterType: 'pending'})}}>Pending</button>
+          <button type="button" onClick={() => {this.setState({filterType: 'completed'})}}>Completed</button>
         </div>
       </div>
     );

@@ -1,15 +1,21 @@
-import React, { Component } from "react";
-import { Router, Switch, Route, Link } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import AuthRoute from "./components/AuthRoute";
-import { checkLoggedIn, clearToken } from "./utils";
-import LocaleProvider from "./contaxt/localeContext";
+import React, { Component } from 'react';
+import {
+  Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import AuthRoute from './components/AuthRoute';
+import { checkLoggedIn, clearToken } from './utils';
+import { LocaleProvider } from './context/localeContext';
 
 const customHistory = createBrowserHistory();
 
@@ -34,7 +40,7 @@ export class Main extends Component {
                   type="button"
                   onClick={() => {
                     clearToken();
-                    customHistory.push("/");
+                    customHistory.push('/');
                   }}
                 >
                   Logout

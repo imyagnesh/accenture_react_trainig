@@ -1,12 +1,36 @@
 {
   "users": [
     {
+      "name": "Nicoleta",
+      "gender": "Female",
+      "username": "nicooletahehe",
+      "password": "abc",
+      "cPassword": "abc",
+      "id": 1
+    },
+    {
+      "name": "Andreea",
+      "gender": "Female",
+      "username": "andr",
+      "password": "abc",
+      "cPassword": "abc",
+      "id": 2
+    },
+    {
+      "name": "Sofia",
+      "gender": "Female",
+      "username": "sf",
+      "password": "abc",
+      "cPassword": "abc",
+      "id": 3
+    },
+    {
       "name": "yagnesh",
       "gender": "male",
       "username": "imyagnesh",
       "password": "Password",
       "confirmPassword": "Password",
-      "id": 1
+      "id": 4
     },
     {
       "name": "rohit",
@@ -14,19 +38,44 @@
       "username": "imrohit",
       "password": "Password",
       "confirmPassword": "Password",
-      "id": 2
+      "id": 5
     }
   ],
   "todoList": [
     {
       "todoText": "give training",
-      "isDone": false,
+      "isDone": true,
       "id": 1
     },
     {
       "todoText": "get milk",
       "isDone": false,
-      "id": 2
+      "id": 6
+    },
+    {
+      "todoText": "pay bills",
+      "isDone": true,
+      "id": 7
+    },
+    {
+      "todoText": "banana",
+      "isDone": false,
+      "id": 8
+    },
+    {
+      "todoText": "tomato",
+      "isDone": false,
+      "id": 9
+    },
+    {
+      "todoText": "flour",
+      "isDone": false,
+      "id": 10
+    },
+    {
+      "todoText": "sugar",
+      "isDone": false,
+      "id": 11
     }
   ]
 }
